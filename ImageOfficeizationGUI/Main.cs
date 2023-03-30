@@ -175,7 +175,6 @@ namespace ImageOfficeizationGUI
                         MessageBox.Show($"图片源中存在WEBP格式，无法进行操作。\n" +
                             $"可以使用[图片转换]将其转为其它格式后再进行操作。\n" +
                             $"{item}", "中止", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                        PATHS.Clear();
                         //dropCtr.Text = "（拖放到此处）";
                         return;
                     }
@@ -205,7 +204,6 @@ namespace ImageOfficeizationGUI
                 {
                     MessageBox.Show($"即将开始转换，但图片源中这些图片的格式和目标格式一致，将被忽略：\n" +
                         $"{sameSb}", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
                 }
                 if (!PATHS.Any())
                 {
@@ -297,15 +295,17 @@ namespace ImageOfficeizationGUI
         /// <param name="e"></param>
         private void Main_Resize(object sender, EventArgs e)
         {
-
+            // 最小化，无需自适应控件
             if (this.WindowState== FormWindowState.Minimized) 
             { 
                 return;
             }
+            // 还原
             if (this.WindowState == FormWindowState.Normal)
             {
                 if (this.Width == PRE_RESIZE_WIDTH)
                 {
+                    // 若当前宽度等于上一次宽度，表示是从最小化状态还原，无需自适应控件
                     return;
                 }
             }
