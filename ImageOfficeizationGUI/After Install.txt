@@ -1,0 +1,16 @@
+﻿>>>>>>BEGIN
+
+Image Officeization - 图片办公化
+
+print("感谢你的安装，祝你使用愉快！");
+
+print("
+
+  图片批量：水印、转换、压缩、缩放
+  四个功能，不输商业付费软件及著名免费软件（如格式工厂）
+  一个安装包，卸载无残留。
+
+");
+
+
+ <<<<<<END WITH GOOD LUCKY FROM BlueSkyCaps

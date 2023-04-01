@@ -1,0 +1,30 @@
+﻿>>>>>>BEGIN
+
+Image Officeization - 图片办公化
+
+---安装和使用声明---
+  此程序是完全免费的，同意安装则表示你接受该程序所作出的操作，在使用此程序的过程中
+  发生的任何损失都与程序以及程序作者无关。
+
+---安装提示---
+  该程序完全免费，若你是因为付费而获取此安装包，则表示你已受骗！
+
+---安装说明---
+  该程序目前具备图片批量操作功能，包括水印添加、尺寸缩放、格式转换以及压缩功能。
+    该程序可以运行在Windows 7及以上系统(64位)。
+
+---程序清单---
+  Product Name：Image Officeization(图片办公化)
+  Version：1.6
+  Date：2023/04/01
+  Author：BlueSkyCaps
+  Describe：an windows image gui tool with the ability to format, zoom, compress size and add watermarks to images, all of which reduce daily office tasks.
+
+---开源信息---
+  此程序界面模块由C#编写（.Net 6），采用Winform框架。
+  Git地址：https://github.com/BlueSkyCaps/ImageOfficeizationGUI
+
+  此程序图片处理核心模块由Golang编写（version 1.8）。
+  Git地址：https://github.com/BlueSkyCaps/image_officeization
+
+ <<<<<<END WITH LOVE
