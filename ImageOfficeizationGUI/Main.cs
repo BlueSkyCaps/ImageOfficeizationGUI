@@ -219,13 +219,16 @@ namespace ImageOfficeizationGUI
             Process process = new();
             var goProcessPath = Path.Combine(Application.StartupPath, "cmd", "image_officeization.exe");
             process.StartInfo.FileName = goProcessPath;
-            // 传入的运行参数：执行单元的值+" "+传递的json数据，如图片水印，执行单元的值为0
-            string? jsonEscapeStrData = args.Item2?.ToString()?.Replace("\"", "\\\"");
+            // 把空格替换成"?"以便命令行参数能够有效传递而不会被截断
+            string? jsonEscapeStrData = args.Item2?.ToString()?
+                .Replace("\"", "\\\"")
+                .Replace(" ", "?");
             if (jsonEscapeStrData is null)
             {
                 MessageBox.Show("程序引发错误，请重试。\n After Escape Json Data is null", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            // 传入的运行参数：执行单元的值+" "+传递的json数据字符串，如图片水印，执行单元的值为0
             process.StartInfo.Arguments = args.Item1+" "+ jsonEscapeStrData;
             process.StartInfo.UseShellExecute = false;
             process.StartInfo.RedirectStandardOutput = false;
@@ -349,6 +352,17 @@ namespace ImageOfficeizationGUI
                     }
                     
                 }
+            }
+        }
+
+        private void textBox6_KeyDown(object sender, KeyEventArgs e)
+        {
+            // 判断是否按下"?"键 传递的数据不允许存在?，因为空格被替换成?号传递
+            if (e.Shift && e.KeyCode == Keys.OemQuestion) 
+            {
+                e.SuppressKeyPress = true; // 阻断按键事件
+                textBox6.Text += "？"; // 将英文"?"替换为中文"？"
+                textBox6.SelectionStart = textBox6.Text.Length;
             }
         }
     }
