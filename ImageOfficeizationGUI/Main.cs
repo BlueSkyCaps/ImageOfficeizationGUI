@@ -106,10 +106,10 @@ namespace ImageOfficeizationGUI
                 }
                 return false;
 
-            }).ToList();
+            }).Distinct().ToList();
             if (!PATHS.Any())
             {
-                MessageBox.Show("无任何有效的图片文件！\n(jpg/png/gif..and so on)", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("无任何有效的图片文件！\n(jpg/png/gif/tif/webp..and so on)", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
             }
             return true;
@@ -148,7 +148,7 @@ namespace ImageOfficeizationGUI
         /// <param name="e"></param>
         private void runBtn_Click(object sender, EventArgs e)
         {
-            if (!PATHS.Any() || OUTDIR is null)
+            if (!Main.PATHS.Any() || OUTDIR is null)
             {
                 MessageBox.Show("图片源和保存目录请选定！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -168,7 +168,7 @@ namespace ImageOfficeizationGUI
             // 当前操作面板不是图片转换，不允许存在webp格式进行操作
             if (tabControl.SelectedIndex!=2)
             {
-                foreach (var item in PATHS)
+                foreach (var item in Main.PATHS)
                 {
                     if (item.ToUpper().EndsWith(".WEBP"))
                     {
@@ -185,10 +185,10 @@ namespace ImageOfficeizationGUI
             {
                 int v = CommonRef.SelectValueParse(comboBox4.SelectedValue);
                 StringBuilder sameSb = new StringBuilder();
-                string[] existPathTmpArr = new string[PATHS.Count];
-                PATHS.CopyTo(0, existPathTmpArr, 0, PATHS.Count);
+                string[] existPathTmpArr = new string[Main.PATHS.Count];
+                Main.PATHS.CopyTo(0, existPathTmpArr, 0, Main.PATHS.Count);
                 List<string> existPathTmp = existPathTmpArr.ToList();
-                foreach (var item in PATHS)
+                foreach (var item in Main.PATHS)
                 {
                     if (CommonRef.IMG_FORMAT_NAME[v] == item.Substring(item.LastIndexOf(".")+1).ToUpper())
                     {
@@ -199,17 +199,17 @@ namespace ImageOfficeizationGUI
                         //return;
                     }
                 }
-                PATHS = existPathTmp;
                 if (sameSb.Length>0)
                 {
                     MessageBox.Show($"即将开始转换，但图片源中这些图片的格式和目标格式一致，将被忽略：\n" +
                         $"{sameSb}", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                if (!PATHS.Any())
+                if (!existPathTmp.Any())
                 {
                     MessageBox.Show("无任何图片能够转换，因为相同格式的皆被忽略。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
+                Main.PATHS = existPathTmp;
             }
             var args = CollectCmdArgs().ToTuple();
             if (args.Item1==-1 || args.Item2 is null)
@@ -233,10 +233,14 @@ namespace ImageOfficeizationGUI
             process.EnableRaisingEvents = true;
             process.Exited += goProcess_Exited; 
             process.Start();
+            this.runBtn.Enabled = false;
         }
 
         private void goProcess_Exited(object? sender, EventArgs e)
         {
+            this.BeginInvoke(() => {
+                this.runBtn.Enabled = true;
+            }); 
             Process? goProcessObj = null;
             if (sender!=null)
             {
@@ -246,7 +250,9 @@ namespace ImageOfficeizationGUI
                 if (goProcessObj.ExitCode!=0)
                 {
                     MessageBox.Show($"程序执行发生错误，请重启尝试。\nGo Exit Code：{goProcessObj.ExitCode}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
+                Process.Start(new ProcessStartInfo() { FileName = OUTDIR, UseShellExecute = true });
             }
         }
 
