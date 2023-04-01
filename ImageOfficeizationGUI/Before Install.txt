@@ -11,11 +11,11 @@ Image Officeization - 图片办公化
 
 ---安装说明---
   该程序目前具备图片批量操作功能，包括水印添加、尺寸缩放、格式转换以及压缩功能。
-    该程序可以运行在Windows 7及以上系统(64位)。
+  该程序可以运行在Windows 7及以上系统(64位)。
 
 ---程序清单---
   Product Name：Image Officeization(图片办公化)
-  Version：1.6
+  Version：1.9
   Date：2023/04/01
   Author：BlueSkyCaps
   Describe：an windows image gui tool with the ability to format, zoom, compress size and add watermarks to images, all of which reduce daily office tasks.
