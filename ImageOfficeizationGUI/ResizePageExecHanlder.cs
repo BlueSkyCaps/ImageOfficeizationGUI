@@ -18,6 +18,20 @@ namespace ImageOfficeizationGUI
         }
 
         /// <summary>
+        /// 获取图片的宽高像素并填入输入框
+        /// </summary>
+        private void InputCurrentImgSizeData()
+        {
+            // 单个图片，PATHS数量一定是1
+            string currentImgPath = PATHS[0];
+            Bitmap bitmap = CommonRef.GetImgWH(PATHS[0]);
+            this.textBox7.Text = bitmap.Width.ToString();
+            this.textBox12.Text = bitmap.Height.ToString();
+        }
+
+
+
+        /// <summary>
         /// 图片缩放 约束比例自动计算宽高
         /// </summary>
         /// <param name="sender"></param>
@@ -30,6 +44,7 @@ namespace ImageOfficeizationGUI
                 return;
             }
             
+            // todo 约束比例应该
             if (sender!=null)
             {
                 TextBox sourceCtr =  (TextBox)sender;
@@ -37,6 +52,31 @@ namespace ImageOfficeizationGUI
                 {
                     return;
                 }
+            }
+        }
+
+        /// <summary>
+        /// 点击了约束比例
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!checkBox1.Checked)
+            {
+                return;
+            }
+            bool v1 = PreRunCommonCheck();
+            if (!v1)
+            {
+                checkBox1.Checked = false;
+                return;
+            }
+            if (PATHS.Count>1)
+            {
+                MessageBox.Show("约束比例：图片源只能是单张图片，而不能是文件夹。", "提示", MessageBoxButtons.OK);
+                checkBox1.Checked = false;
+                return;
             }
         }
 

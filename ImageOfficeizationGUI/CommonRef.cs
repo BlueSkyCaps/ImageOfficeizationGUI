@@ -106,6 +106,14 @@ namespace ImageOfficeizationGUI
 
             return value;
         }
+
+        public static Bitmap GetImgWH(string imgPath)
+        {
+            // 读取图像文件到 Bitmap 对象中
+            Bitmap bmp = new Bitmap(imgPath);
+
+            return bmp;
+        }
     }
 
 }

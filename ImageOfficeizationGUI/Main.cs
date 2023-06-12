@@ -62,6 +62,7 @@ namespace ImageOfficeizationGUI
 
         private void DragDropMethod(DragEventArgs e, Button dropCtrSource)
         {
+            this.checkBox1.Checked = false;
             PATHS = new List<string>();
             if (e?.Data is null)
             {
@@ -71,7 +72,7 @@ namespace ImageOfficeizationGUI
             object[] dropDataArray = (object[])e.Data.GetData(DataFormats.FileDrop);
             if (dropDataArray.Length > 1)
             {
-                MessageBox.Show("请拖放单个文件夹或图片", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("请拖放单个文件夹或单张图片，若有多张图片可统一放在单个文件夹里。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             string? imageSrcPath = dropDataArray[0]?.ToString();
@@ -104,6 +105,8 @@ namespace ImageOfficeizationGUI
             else
             {
                 PATHS.Add(imageSrcPath);
+                // 拖放的是单张图片，图片缩放填充此图片的宽高像素
+                InputCurrentImgSizeData();
             }
             PATHS = PATHS.Where(src =>
             {
@@ -149,6 +152,27 @@ namespace ImageOfficeizationGUI
             return args;
         }
 
+        public bool PreRunCommonCheck()
+        {
+            if (!Main.PATHS.Any() || OUTDIR is null)
+            {
+                MessageBox.Show("图片源和保存目录请选定！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return false;
+            }
+
+            if (!Directory.Exists(OUTDIR))
+            {
+                MessageBox.Show("保存目录已不存在！", "中止", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                return false;
+            }
+
+            if (!CheckSrcPathLogic(dropCtr.Text))
+            {
+                return false;
+            }
+            return true;
+        }
+
         /// <summary>
         /// 操作栏运行按钮被点击 搜集当前操作单元的控件数据 执行go
         /// </summary>
@@ -156,23 +180,12 @@ namespace ImageOfficeizationGUI
         /// <param name="e"></param>
         private void runBtn_Click(object sender, EventArgs e)
         {
-            if (!Main.PATHS.Any() || OUTDIR is null)
-            {
-                MessageBox.Show("图片源和保存目录请选定！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
 
-            if (!Directory.Exists(OUTDIR))
-            {
-                MessageBox.Show("保存目录已不存在！", "中止", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                return;
-            }
-
-            if (!CheckSrcPathLogic(dropCtr.Text))
+            bool v1 = PreRunCommonCheck();
+            if (!v1)
             {
                 return;
             }
-
             // 当前操作面板不是图片转换，不允许存在webp格式进行操作
             if (tabControl.SelectedIndex != 2)
             {
@@ -375,5 +388,7 @@ namespace ImageOfficeizationGUI
                 textBox6.SelectionStart = textBox6.Text.Length;
             }
         }
+
+    
     }
 }
