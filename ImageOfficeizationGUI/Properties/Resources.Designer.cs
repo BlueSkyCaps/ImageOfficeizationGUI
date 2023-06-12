@@ -61,7 +61,7 @@ namespace ImageOfficeizationGUI.Properties {
         }
         
         /// <summary>
-        ///   查找类似 2.3 的本地化字符串。
+        ///   查找类似 2.4 的本地化字符串。
         /// </summary>
         internal static string AppVersion {
             get {

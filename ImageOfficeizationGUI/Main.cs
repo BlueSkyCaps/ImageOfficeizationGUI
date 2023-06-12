@@ -34,12 +34,12 @@ namespace ImageOfficeizationGUI
         /// <param name="control"></param>
         private void InitControlsSizeBind(Control control)
         {
-            if (control.Controls.Count>0)
+            if (control.Controls.Count > 0)
             {
                 foreach (Control item in control.Controls)
                 {
-                    item.Tag = item.Width + "," + item.Height+","+item.Font.Size;
-                    if (item.Controls.Count>0)
+                    item.Tag = item.Width + "," + item.Height + "," + item.Font.Size;
+                    if (item.Controls.Count > 0)
                     {
                         InitControlsSizeBind(item);
                     }
@@ -72,10 +72,10 @@ namespace ImageOfficeizationGUI
             if (dropDataArray.Length > 1)
             {
                 MessageBox.Show("请拖放单个文件夹或图片", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return ;
+                return;
             }
             string? imageSrcPath = dropDataArray[0]?.ToString();
-            if (! CheckSrcPathLogic(imageSrcPath))
+            if (!CheckSrcPathLogic(imageSrcPath))
             {
                 return;
             }
@@ -90,7 +90,7 @@ namespace ImageOfficeizationGUI
         /// <returns></returns>
         private bool CheckSrcPathLogic(string? imageSrcPath)
         {
-            
+
             if (imageSrcPath == null)
             {
                 MessageBox.Show("cant get image source path", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -143,7 +143,7 @@ namespace ImageOfficeizationGUI
                     args = (3, CompressPageArgsDeal());
                     break;
                 default:
-                    args = (-1, null);    
+                    args = (-1, null);
                     break;
             }
             return args;
@@ -168,13 +168,13 @@ namespace ImageOfficeizationGUI
                 return;
             }
 
-            if (! CheckSrcPathLogic(dropCtr.Text))
+            if (!CheckSrcPathLogic(dropCtr.Text))
             {
                 return;
             }
- 
+
             // 当前操作面板不是图片转换，不允许存在webp格式进行操作
-            if (tabControl.SelectedIndex!=2)
+            if (tabControl.SelectedIndex != 2)
             {
                 foreach (var item in Main.PATHS)
                 {
@@ -198,7 +198,7 @@ namespace ImageOfficeizationGUI
                 List<string> existPathTmp = existPathTmpArr.ToList();
                 foreach (var item in Main.PATHS)
                 {
-                    if (CommonRef.IMG_FORMAT_NAME[v] == item.Substring(item.LastIndexOf(".")+1).ToUpper())
+                    if (CommonRef.IMG_FORMAT_NAME[v] == item.Substring(item.LastIndexOf(".") + 1).ToUpper())
                     {
                         sameSb.AppendLine(item);
                         existPathTmp.Remove(item);
@@ -207,7 +207,7 @@ namespace ImageOfficeizationGUI
                         //return;
                     }
                 }
-                if (sameSb.Length>0)
+                if (sameSb.Length > 0)
                 {
                     MessageBox.Show($"即将开始转换，但图片源中这些图片的格式和目标格式一致，将被忽略：\n" +
                         $"{sameSb}", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -220,7 +220,7 @@ namespace ImageOfficeizationGUI
                 Main.PATHS = existPathTmp;
             }
             var args = CollectCmdArgs().ToTuple();
-            if (args.Item1==-1 || args.Item2 is null)
+            if (args.Item1 == -1 || args.Item2 is null)
             {
                 return;
             }
@@ -237,28 +237,30 @@ namespace ImageOfficeizationGUI
                 return;
             }
             // 传入的运行参数：执行单元的值+" "+传递的json数据字符串，如图片水印，执行单元的值为0
-            process.StartInfo.Arguments = args.Item1+" "+ jsonEscapeStrData;
+            process.StartInfo.Arguments = args.Item1 + " " + jsonEscapeStrData;
             process.StartInfo.UseShellExecute = false;
             process.StartInfo.RedirectStandardOutput = false;
             process.StartInfo.CreateNoWindow = true;
             process.EnableRaisingEvents = true;
-            process.Exited += goProcess_Exited; 
+            process.Exited += goProcess_Exited;
             process.Start();
             this.runBtn.Enabled = false;
         }
 
         private void goProcess_Exited(object? sender, EventArgs e)
         {
-            this.BeginInvoke(() => {
+            this.BeginInvoke(() =>
+            {
                 this.runBtn.Enabled = true;
-            }); 
+            });
             Process? goProcessObj = null;
-            if (sender!=null)
+            if (sender != null)
             {
                 goProcessObj = (Process)sender;
             }
-            if (goProcessObj != null) {
-                if (goProcessObj.ExitCode!=0)
+            if (goProcessObj != null)
+            {
+                if (goProcessObj.ExitCode != 0)
                 {
                     MessageBox.Show($"程序执行发生错误，请重启尝试。\nGo Exit Code：{goProcessObj.ExitCode}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
@@ -279,7 +281,7 @@ namespace ImageOfficeizationGUI
 
             if (outDialog.ShowDialog() == DialogResult.OK)
             {
-                outDirCtr.Text =  outDialog.SelectedPath;
+                outDirCtr.Text = outDialog.SelectedPath;
                 OUTDIR = outDialog.SelectedPath;
             }
         }
@@ -313,8 +315,8 @@ namespace ImageOfficeizationGUI
         private void Main_Resize(object sender, EventArgs e)
         {
             // 最小化，无需自适应控件
-            if (this.WindowState== FormWindowState.Minimized) 
-            { 
+            if (this.WindowState == FormWindowState.Minimized)
+            {
                 return;
             }
             // 还原
@@ -350,15 +352,15 @@ namespace ImageOfficeizationGUI
                     {
                         item.Width = (int)(Convert.ToDouble(wh.GetValue(0)) * wp);
                         item.Height = (int)(Convert.ToDouble(wh.GetValue(1)) * hp);
-                        var curFontSize= (int)(Convert.ToDouble(wh.GetValue(2)) * hp);
+                        var curFontSize = (int)(Convert.ToDouble(wh.GetValue(2)) * hp);
                         // fontSize+1，避免最小化窗口时，字体大小自动变为0时引发异常
-                        item.Font = new Font(item.Font.FontFamily, curFontSize+1, item.Font.Style, item.Font.Unit);
+                        item.Font = new Font(item.Font.FontFamily, curFontSize + 1, item.Font.Style, item.Font.Unit);
                         if (item.Controls.Count > 0)
                         {
                             UpdateControlsSizeBind(item, wp, hp);
                         }
                     }
-                    
+
                 }
             }
         }
@@ -366,7 +368,7 @@ namespace ImageOfficeizationGUI
         private void textBox6_KeyDown(object sender, KeyEventArgs e)
         {
             // 判断是否按下"?"键 传递的数据不允许存在?，因为空格被替换成?号传递
-            if (e.Shift && e.KeyCode == Keys.OemQuestion) 
+            if (e.Shift && e.KeyCode == Keys.OemQuestion)
             {
                 e.SuppressKeyPress = true; // 阻断按键事件
                 textBox6.Text += "？"; // 将英文"?"替换为中文"？"

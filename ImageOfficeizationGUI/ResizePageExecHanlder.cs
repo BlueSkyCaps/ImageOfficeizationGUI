@@ -13,9 +13,7 @@ namespace ImageOfficeizationGUI
         /// </summary>
         private void InitResizePageDefault()
         {
-            // 默认期望缩放的像素宽高
-            textBox7.Text = "300";
-            textBox12.Text = "300";
+ 
         }
 
         public string? ResizekPageArgsDeal()
