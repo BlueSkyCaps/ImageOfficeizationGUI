@@ -1,6 +1,8 @@
 using ImageOfficeizationGUI.Model;
+using ImageOfficeizationGUI.Properties;
 using System.Diagnostics;
 using System.Linq;
+using System.Resources;
 using System.Text;
 
 namespace ImageOfficeizationGUI
@@ -12,7 +14,13 @@ namespace ImageOfficeizationGUI
         private static double PRE_RESIZE_WIDTH;
         public Main()
         {
+            //Test.RunTest();
             InitializeComponent();
+            // 获取资源管理器对象
+            ResourceManager manager = new(typeof(Resources));
+            // 获取字符串资源
+            string? version = manager.GetString("AppVersion");
+            this.Text = "Image Officeization - 图片办公化 v" + version;
             InitPageExecDefaultInputValue();
             ORG_WIDTH_MAIN = this.Width;
             ORG_HIGH_MAIN = this.Height;

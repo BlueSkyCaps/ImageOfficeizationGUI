@@ -15,8 +15,8 @@ Image Officeization - 图片办公化
 
 ---程序清单---
   Product Name：Image Officeization(图片办公化)
-  Version：1.9
-  Date：2023/04/01
+  Version：2.0
+  Date：2023/06/12
   Author：BlueSkyCaps
   Describe：an windows image gui tool with the ability to format, zoom, compress size and add watermarks to images, all of which reduce daily office tasks.
 
@@ -26,5 +26,8 @@ Image Officeization - 图片办公化
 
   此程序图片处理核心模块由Golang编写（version 1.8）。
   Git地址：https://github.com/BlueSkyCaps/image_officeization
+
+---开源信息---
+  更新日志：减少安装大小。
 
  <<<<<<END WITH LOVE
