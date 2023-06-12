@@ -91,6 +91,9 @@
             flowLayoutPanel24 = new FlowLayoutPanel();
             label16 = new Label();
             textBox12 = new TextBox();
+            flowLayoutPanel29 = new FlowLayoutPanel();
+            label20 = new Label();
+            checkBox1 = new CheckBox();
             convertTabPage = new TabPage();
             flowLayoutPanel25 = new FlowLayoutPanel();
             flowLayoutPanel26 = new FlowLayoutPanel();
@@ -112,9 +115,6 @@
             toolStripSeparator1 = new ToolStripSeparator();
             runBtn = new ToolStripButton();
             compressMsgToolTip = new ToolTip(components);
-            flowLayoutPanel29 = new FlowLayoutPanel();
-            label20 = new Label();
-            checkBox1 = new CheckBox();
             mainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
@@ -146,6 +146,7 @@
             flowLayoutPanel22.SuspendLayout();
             flowLayoutPanel23.SuspendLayout();
             flowLayoutPanel24.SuspendLayout();
+            flowLayoutPanel29.SuspendLayout();
             convertTabPage.SuspendLayout();
             flowLayoutPanel25.SuspendLayout();
             flowLayoutPanel26.SuspendLayout();
@@ -154,7 +155,6 @@
             flowLayoutPanel28.SuspendLayout();
             flowLayoutPanel21.SuspendLayout();
             toolStrip2.SuspendLayout();
-            flowLayoutPanel29.SuspendLayout();
             SuspendLayout();
             // 
             // mainPanel
@@ -808,6 +808,36 @@
             textBox12.TabIndex = 2;
             textBox12.Text = "1920";
             // 
+            // flowLayoutPanel29
+            // 
+            flowLayoutPanel29.AutoSize = true;
+            flowLayoutPanel29.Controls.Add(label20);
+            flowLayoutPanel29.Controls.Add(checkBox1);
+            flowLayoutPanel29.Location = new Point(2, 90);
+            flowLayoutPanel29.Margin = new Padding(2, 4, 2, 4);
+            flowLayoutPanel29.Name = "flowLayoutPanel29";
+            flowLayoutPanel29.Size = new Size(97, 23);
+            flowLayoutPanel29.TabIndex = 2;
+            // 
+            // label20
+            // 
+            label20.AutoSize = true;
+            label20.Location = new Point(2, 0);
+            label20.Margin = new Padding(2, 0, 2, 0);
+            label20.Name = "label20";
+            label20.Size = new Size(69, 20);
+            label20.TabIndex = 0;
+            label20.Text = "约束比例";
+            // 
+            // checkBox1
+            // 
+            checkBox1.AutoSize = true;
+            checkBox1.Location = new Point(76, 3);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(18, 17);
+            checkBox1.TabIndex = 3;
+            checkBox1.UseVisualStyleBackColor = true;
+            // 
             // convertTabPage
             // 
             convertTabPage.Controls.Add(flowLayoutPanel25);
@@ -1037,38 +1067,6 @@
             compressMsgToolTip.InitialDelay = 100;
             compressMsgToolTip.ReshowDelay = 100;
             // 
-            // flowLayoutPanel29
-            // 
-            flowLayoutPanel29.AutoSize = true;
-            flowLayoutPanel29.Controls.Add(label20);
-            flowLayoutPanel29.Controls.Add(checkBox1);
-            flowLayoutPanel29.Location = new Point(2, 90);
-            flowLayoutPanel29.Margin = new Padding(2, 4, 2, 4);
-            flowLayoutPanel29.Name = "flowLayoutPanel29";
-            flowLayoutPanel29.Size = new Size(97, 23);
-            flowLayoutPanel29.TabIndex = 2;
-            // 
-            // label20
-            // 
-            label20.AutoSize = true;
-            label20.Location = new Point(2, 0);
-            label20.Margin = new Padding(2, 0, 2, 0);
-            label20.Name = "label20";
-            label20.Size = new Size(69, 20);
-            label20.TabIndex = 0;
-            label20.Text = "约束比例";
-            // 
-            // checkBox1
-            // 
-            checkBox1.AutoSize = true;
-            checkBox1.Checked = true;
-            checkBox1.CheckState = CheckState.Checked;
-            checkBox1.Location = new Point(76, 3);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(18, 17);
-            checkBox1.TabIndex = 3;
-            checkBox1.UseVisualStyleBackColor = true;
-            // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(120F, 120F);
@@ -1137,6 +1135,8 @@
             flowLayoutPanel23.PerformLayout();
             flowLayoutPanel24.ResumeLayout(false);
             flowLayoutPanel24.PerformLayout();
+            flowLayoutPanel29.ResumeLayout(false);
+            flowLayoutPanel29.PerformLayout();
             convertTabPage.ResumeLayout(false);
             convertTabPage.PerformLayout();
             flowLayoutPanel25.ResumeLayout(false);
@@ -1152,8 +1152,6 @@
             flowLayoutPanel21.ResumeLayout(false);
             toolStrip2.ResumeLayout(false);
             toolStrip2.PerformLayout();
-            flowLayoutPanel29.ResumeLayout(false);
-            flowLayoutPanel29.PerformLayout();
             ResumeLayout(false);
         }
 

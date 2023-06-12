@@ -13,7 +13,31 @@ namespace ImageOfficeizationGUI
         /// </summary>
         private void InitResizePageDefault()
         {
- 
+            this.textBox7.TextChanged += ResizeHWValueTextChanged;
+            this.textBox12.TextChanged += ResizeHWValueTextChanged;
+        }
+
+        /// <summary>
+        /// 图片缩放 约束比例自动计算宽高
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        private void ResizeHWValueTextChanged(object? sender, EventArgs e)
+        {
+            if (!checkBox1.Checked)
+            {
+                return;
+            }
+            
+            if (sender!=null)
+            {
+                TextBox sourceCtr =  (TextBox)sender;
+                if (String.IsNullOrWhiteSpace(sourceCtr.Text))
+                {
+                    return;
+                }
+            }
         }
 
         public string? ResizekPageArgsDeal()
