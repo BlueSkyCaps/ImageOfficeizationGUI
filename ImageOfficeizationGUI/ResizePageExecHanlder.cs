@@ -8,13 +8,26 @@ namespace ImageOfficeizationGUI
 {
     public partial class Main
     {
+        // 约束比例时  存储原先的宽、高的值
+        private static ushort[] PR_WH = new ushort[2];
         /// <summary>
         /// 初始化图片缩放面板默认值
         /// </summary>
         private void InitResizePageDefault()
         {
+            BindWHInputEvent();
+        }
+
+        private void BindWHInputEvent()
+        {
             this.textBox7.TextChanged += ResizeHWValueTextChanged;
             this.textBox12.TextChanged += ResizeHWValueTextChanged;
+        }
+
+        private void DeBindWHInputEvent()
+        {
+            this.textBox7.TextChanged -= ResizeHWValueTextChanged;
+            this.textBox12.TextChanged -= ResizeHWValueTextChanged;
         }
 
         /// <summary>
@@ -44,7 +57,7 @@ namespace ImageOfficeizationGUI
                 return;
             }
             
-            // todo 约束比例应该
+         
             if (sender!=null)
             {
                 TextBox sourceCtr =  (TextBox)sender;
@@ -52,6 +65,27 @@ namespace ImageOfficeizationGUI
                 {
                     return;
                 }
+                // 先注销事件，避免改值时事件被循环响应
+                DeBindWHInputEvent();
+                // 事件源是宽
+                if (sourceCtr.Name== textBox7.Name)
+                {
+                    //h=原图h/(原图w/当前w)
+                    double v = PR_WH[0] / Convert.ToDouble(textBox7.Text);
+                    v = Math.Round( Convert.ToInt16(PR_WH[1]) / v);
+                    this.textBox12.Text = Convert.ToString((Int16)v);
+                }
+                else
+                {
+                    // 事件源是高
+
+                    //w=原图w/(原图h/当前h)
+                    double v = PR_WH[1] / Convert.ToDouble(textBox12.Text);
+                    v = Math.Round(Convert.ToInt16(PR_WH[0]) / v);
+                    this.textBox7.Text = Convert.ToString((Int16)v);
+                }
+                // 重新绑定事件
+                BindWHInputEvent();
             }
         }
 
@@ -78,6 +112,9 @@ namespace ImageOfficeizationGUI
                 checkBox1.Checked = false;
                 return;
             }
+            DropSingleImgInputData();
+            PR_WH[0] = Convert.ToUInt16(textBox7.Text);
+            PR_WH[1] = Convert.ToUInt16(textBox12.Text);
         }
 
         public string? ResizekPageArgsDeal()

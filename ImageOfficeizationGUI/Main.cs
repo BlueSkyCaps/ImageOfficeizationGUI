@@ -80,8 +80,24 @@ namespace ImageOfficeizationGUI
             {
                 return;
             }
-
             dropCtrSource.Text = imageSrcPath;
+           
+            if (! Directory.Exists(imageSrcPath))
+            {
+                DropSingleImgInputData();
+            }
+
+        }
+        /// <summary>
+        /// 拖放的是单张图片，图片缩放填充此图片的宽高像素
+        /// </summary>
+        private void DropSingleImgInputData()
+        {
+            // 填充前注销TextChanged事件，避免逻辑错乱
+            DeBindWHInputEvent();
+            InputCurrentImgSizeData();
+            // 重新绑定TextChanged事件
+            BindWHInputEvent();
         }
 
         /// <summary>
@@ -105,8 +121,14 @@ namespace ImageOfficeizationGUI
             else
             {
                 PATHS.Add(imageSrcPath);
+                ///*
                 // 拖放的是单张图片，图片缩放填充此图片的宽高像素
-                InputCurrentImgSizeData();
+                // */
+                //// 填充前注销TextChanged事件，避免逻辑错乱
+                //DeBindWHInputEvent();
+                //InputCurrentImgSizeData();
+                //// 重新绑定TextChanged事件
+                //BindWHInputEvent();
             }
             PATHS = PATHS.Where(src =>
             {
@@ -166,7 +188,7 @@ namespace ImageOfficeizationGUI
                 return false;
             }
 
-            if (!CheckSrcPathLogic(dropCtr.Text))
+            if (! CheckSrcPathLogic(dropCtr.Text))
             {
                 return false;
             }
