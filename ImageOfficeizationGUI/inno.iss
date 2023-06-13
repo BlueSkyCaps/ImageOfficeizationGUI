@@ -2,7 +2,7 @@
 ; 有关创建 Inno Setup 脚本文件的详细资料请查阅帮助文档！
 
 #define MyAppName "Image Officeization"
-#define MyAppVersion "2.3"
+#define MyAppVersion "2.4"
 #define MyAppPublisher "BlueSkyCaps"
 #define MyAppURL "https://www.reminisce.com/"
 #define MyAppExeName "ImageOfficeizationGUI.exe"
