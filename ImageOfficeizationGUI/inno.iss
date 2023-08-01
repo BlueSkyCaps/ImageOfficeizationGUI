@@ -21,13 +21,13 @@ AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
 DefaultDirName={autopf}\{#MyAppName}
 DisableProgramGroupPage=yes
-InfoBeforeFile=D:\work_space\baidu_uploading\ImageOfficeizationGUI\ImageOfficeizationGUI\Before Install.txt
-InfoAfterFile=D:\work_space\baidu_uploading\ImageOfficeizationGUI\ImageOfficeizationGUI\After Install.txt
+InfoBeforeFile=D:\work_space\baidu_uploading\projects\ImageOfficeizationGUI\ImageOfficeizationGUI\Before Install.txt
+InfoAfterFile=D:\work_space\baidu_uploading\projects\ImageOfficeizationGUI\ImageOfficeizationGUI\After Install.txt
 ; 以下行取消注释，以在非管理安装模式下运行（仅为当前用户安装）。
 ;PrivilegesRequired=lowest
 OutputDir=C:\Users\BlueSkyCarry\Desktop
 OutputBaseFilename=image-officeization-installer
-SetupIconFile=D:\work_space\baidu_uploading\ImageOfficeizationGUI\ImageOfficeizationGUI\Resources\edit-main.ico
+SetupIconFile=D:\work_space\baidu_uploading\projects\ImageOfficeizationGUI\ImageOfficeizationGUI\Resources\edit-main.ico
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
@@ -40,8 +40,8 @@ Name: "chinesesimp"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "D:\work_space\baidu_uploading\ImageOfficeizationGUI\ImageOfficeizationGUI\bin\Release\net6.0-windows\win-x64\publish\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\work_space\baidu_uploading\ImageOfficeizationGUI\ImageOfficeizationGUI\bin\Release\net6.0-windows\win-x64\publish\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "D:\work_space\baidu_uploading\projects\ImageOfficeizationGUI\ImageOfficeizationGUI\bin\Release\net6.0-windows\win-x64\publish\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "D:\work_space\baidu_uploading\projects\ImageOfficeizationGUI\ImageOfficeizationGUI\bin\Release\net6.0-windows\win-x64\publish\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 
 ; 注意: 不要在任何共享系统文件上使用“Flags: ignoreversion”
 
